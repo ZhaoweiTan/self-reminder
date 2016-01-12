@@ -7,15 +7,21 @@
 
 		$mail = new PHPMailer();
 
+		$mymail = fopen("maillist.txt", "r") or die("Unable to open file!");
+		$from = fgets($mymail);
+  		$to = fgets($mymail);
+  		$from = substr($from, 0, -1);
+  		$to = substr($from, 0, -1);
+
 		$mail->IsSMTP();                                      // set mailer to use SMTP
 		$mail->Host = "smtp.163.com";  // specify main and backup server
 		$mail->SMTPAuth = true;     // turn on SMTP authentication
 		$mail->Username = "x13504";  // SMTP username
 		$mail->Password = "youproveit"; // SMTP password
 
-		$mail->From = "x13504@163.com";
+		$mail->From = $from;
 		$mail->FromName = "Reminder";
-		$mail->AddAddress("233831836@qq.com");
+		$mail->AddAddress($to);
 
 		$mail->WordWrap = 50;                                 // set word wrap to 50 characters
 		$mail->IsHTML(true);                                  // set email format to HTML
